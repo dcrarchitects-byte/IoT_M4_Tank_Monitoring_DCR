@@ -1,1 +1,14 @@
-{"version":1,"author":"David Castillo Ramirez","editor":"wokwi","parts":[{"type":"board-pi-pico-w","id":"pico","top":10,"left":130,"attrs":{}},{"type":"wokwi-dht22","id":"dht1","top":-95,"left":-150,"attrs":{"temperature":"28","humidity":"45"}},{"type":"wokwi-led","id":"led1","top":105,"left":-135,"attrs":{"color":"green","label":"Web LED"}}],"connections":[],"dependencies":{}}
+{
+ "version":1,"author":"David Castillo Ramirez","editor":"wokwi",
+ "parts":[
+  {"type":"board-pi-pico-w","id":"pico","top":10,"left":130,"attrs":{}},
+  {"type":"wokwi-dht22","id":"dht1","top":-95,"left":-150,"attrs":{"temperature":"28","humidity":"45"}},
+  {"type":"wokwi-resistor","id":"pull","top":-5,"left":-75,"attrs":{"value":"10000"}},
+  {"type":"wokwi-led","id":"led1","top":105,"left":-135,"attrs":{"color":"green","label":"Web LED"}},
+  {"type":"wokwi-resistor","id":"r1","top":160,"left":-80,"attrs":{"value":"220"}}
+ ],
+ "connections":[
+  ["dht1:VCC","pico:3V3","red",["h195","v165"]],["dht1:GND","pico:GND.1","black",["h185","v115"]],["dht1:SDA","pico:GP2","yellow",["v70","h180"]],["pull:1","dht1:SDA","yellow",["h-40","v-40"]],["pull:2","pico:3V3","red",["h150","v85"]],
+  ["pico:GP15","r1:2","green",["h-160","v120"]],["r1:1","led1:A","green",["h-35","v-35"]],["led1:C","pico:GND.4","black",["h210","v-85"]]
+ ],"dependencies":{}
+}
