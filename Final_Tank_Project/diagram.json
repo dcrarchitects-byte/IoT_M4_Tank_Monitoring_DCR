@@ -1,1 +1,45 @@
-{"version":1,"author":"David Castillo Ramirez","editor":"wokwi","parts":[{"type":"wokwi-breadboard-half","id":"bb1","top":-45,"left":-330,"attrs":{}},{"type":"board-pi-pico-w","id":"pico","top":-10,"left":210,"rotate":90,"attrs":{}},{"type":"wokwi-dht22","id":"dht1","top":-205,"left":-285,"attrs":{"temperature":"26","humidity":"55"}},{"type":"wokwi-hc-sr04","id":"sonar1","top":-220,"left":-40,"attrs":{"distance":"25"}},{"type":"wokwi-rgb-led","id":"rgb1","top":115,"left":-280,"attrs":{"common":"cathode"}},{"type":"wokwi-led","id":"tankLed","top":110,"left":-105,"attrs":{"color":"red","label":"Tank Warning"}},{"type":"wokwi-led","id":"pumpLed","top":110,"left":60,"attrs":{"color":"yellow","label":"Pump"}}],"connections":[],"dependencies":{}}
+{
+  "version": 1,
+  "author": "David Castillo Ramirez",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-breadboard-half", "id": "bb1", "top": -45, "left": -330, "attrs": {} },
+    { "type": "board-pi-pico-w", "id": "pico", "top": -10, "left": 210, "rotate": 90, "attrs": {} },
+    { "type": "wokwi-dht22", "id": "dht1", "top": -205, "left": -285, "attrs": { "temperature": "26", "humidity": "55" } },
+    { "type": "wokwi-hc-sr04", "id": "sonar1", "top": -220, "left": -40, "attrs": { "distance": "25" } },
+    { "type": "wokwi-rgb-led", "id": "rgb1", "top": 115, "left": -280, "attrs": { "common": "cathode" } },
+    { "type": "wokwi-led", "id": "tankLed", "top": 110, "left": -105, "attrs": { "color": "red", "label": "Tank Warning" } },
+    { "type": "wokwi-led", "id": "pumpLed", "top": 110, "left": 60, "attrs": { "color": "yellow", "label": "Pump" } },
+    { "type": "wokwi-resistor", "id": "dhtPull", "top": -130, "left": -205, "attrs": { "value": "10000" } },
+    { "type": "wokwi-resistor", "id": "rr", "top": 178, "left": -255, "rotate": 90, "attrs": { "value": "220" } },
+    { "type": "wokwi-resistor", "id": "rg", "top": 178, "left": -225, "rotate": 90, "attrs": { "value": "220" } },
+    { "type": "wokwi-resistor", "id": "rb", "top": 178, "left": -195, "rotate": 90, "attrs": { "value": "220" } },
+    { "type": "wokwi-resistor", "id": "rTank", "top": 178, "left": -80, "rotate": 90, "attrs": { "value": "220" } },
+    { "type": "wokwi-resistor", "id": "rPump", "top": 178, "left": 85, "rotate": 90, "attrs": { "value": "220" } }
+  ],
+  "connections": [
+    [ "dht1:VCC", "pico:3V3", "red", [ "v-18", "h485", "v190" ] ],
+    [ "dht1:GND", "pico:GND.1", "black", [ "v18", "h470", "v155" ] ],
+    [ "dht1:SDA", "pico:GP2", "yellow", [ "v62", "h410", "v77" ] ],
+    [ "dhtPull:1", "dht1:SDA", "yellow", [ "h-18", "v-55" ] ],
+    [ "dhtPull:2", "pico:3V3", "red", [ "h410", "v135" ] ],
+    [ "sonar1:VCC", "pico:VBUS", "red", [ "v-30", "h345", "v160" ] ],
+    [ "sonar1:GND", "pico:GND.8", "black", [ "v-5", "h350", "v210" ] ],
+    [ "sonar1:TRIG", "pico:GP3", "orange", [ "v70", "h330", "v62" ] ],
+    [ "sonar1:ECHO", "pico:GP4", "blue", [ "v90", "h315", "v42" ] ],
+    [ "pico:GP13", "rr:2", "red", [ "h-340", "v175" ] ],
+    [ "rr:1", "rgb1:R", "red", [ "v-25", "h-10" ] ],
+    [ "pico:GP14", "rg:2", "green", [ "h-325", "v165" ] ],
+    [ "rg:1", "rgb1:G", "green", [ "v-25", "h0" ] ],
+    [ "pico:GP15", "rb:2", "blue", [ "h-310", "v155" ] ],
+    [ "rb:1", "rgb1:B", "blue", [ "v-25", "h10" ] ],
+    [ "rgb1:COM", "pico:GND.4", "black", [ "h390", "v15" ] ],
+    [ "pico:GP16", "rTank:2", "red", [ "h-205", "v155" ] ],
+    [ "rTank:1", "tankLed:A", "red", [ "v-25" ] ],
+    [ "tankLed:C", "pico:GND.5", "black", [ "h300", "v15" ] ],
+    [ "pico:GP17", "rPump:2", "orange", [ "h-55", "v145" ] ],
+    [ "rPump:1", "pumpLed:A", "orange", [ "v-25" ] ],
+    [ "pumpLed:C", "pico:GND.5", "black", [ "h140", "v15" ] ]
+  ],
+  "dependencies": {}
+}
