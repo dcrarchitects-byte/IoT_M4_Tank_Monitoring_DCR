@@ -1,1 +1,11 @@
-{"version":1,"author":"David Castillo Ramirez","editor":"wokwi","parts":[{"type":"board-pi-pico-w","id":"pico","top":20,"left":150,"attrs":{}},{"type":"wokwi-hc-sr04","id":"sonar1","top":-90,"left":-110,"attrs":{"distance":"30"}}],"connections":[],"dependencies":{}}
+{
+ "version":1,"author":"David Castillo Ramirez","editor":"wokwi",
+ "parts":[
+  {"type":"board-pi-pico-w","id":"pico","top":20,"left":150,"attrs":{}},
+  {"type":"wokwi-hc-sr04","id":"sonar1","top":-90,"left":-110,"attrs":{"distance":"30"}}
+ ],
+ "connections":[
+  ["sonar1:VCC","pico:VBUS","red",["h185","v160"]],["sonar1:GND","pico:GND.8","black",["h190","v125"]],
+  ["sonar1:TRIG","pico:GP3","orange",["v75","h190"]],["sonar1:ECHO","pico:GP4","blue",["v95","h175"]]
+ ],"dependencies":{}
+}
