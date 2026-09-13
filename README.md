@@ -64,7 +64,3 @@ IoT_M4_Tank_Monitoring_DCR/
 ## Evidence
 
 See **[Evidence_Links.md](Evidence_Links.md)** for direct links to all guided projects, final-project assets, and the slots where video URLs will be added after recording.
-
-## Wokwi note
-
-Wokwi MicroPython projects use `main.py` and `diagram.json`. Import those files from any project folder into a compatible Pico W MicroPython project to reproduce the circuit and program.

@@ -1,0 +1,1 @@
+{"version":1,"author":"David Castillo Ramirez","editor":"wokwi","parts":[{"type":"board-pi-pico-w","id":"pico","top":20,"left":110,"attrs":{}},{"type":"wokwi-potentiometer","id":"pot1","top":-90,"left":-150,"attrs":{}},{"type":"wokwi-servo","id":"servo1","top":110,"left":-150,"attrs":{}}],"connections":[],"dependencies":{}}
