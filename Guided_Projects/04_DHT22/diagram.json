@@ -1,1 +1,12 @@
-{"version":1,"author":"David Castillo Ramirez","editor":"wokwi","parts":[{"type":"board-pi-pico-w","id":"pico","top":0,"left":130,"attrs":{}},{"type":"wokwi-dht22","id":"dht1","top":-80,"left":-120,"attrs":{"temperature":"24","humidity":"50"}},{"type":"wokwi-resistor","id":"r1","top":20,"left":-55,"attrs":{"value":"10000"}}],"connections":[],"dependencies":{}}
+{
+ "version":1,"author":"David Castillo Ramirez","editor":"wokwi",
+ "parts":[
+  {"type":"board-pi-pico-w","id":"pico","top":0,"left":130,"attrs":{}},
+  {"type":"wokwi-dht22","id":"dht1","top":-80,"left":-120,"attrs":{"temperature":"24","humidity":"50"}},
+  {"type":"wokwi-resistor","id":"r1","top":20,"left":-55,"attrs":{"value":"10000"}}
+ ],
+ "connections":[
+  ["dht1:VCC","pico:3V3","red",["h175","v150"]],["dht1:GND","pico:GND.1","black",["h165","v100"]],
+  ["dht1:SDA","pico:GP2","yellow",["v60","h165"]],["r1:1","dht1:SDA","yellow",["v-35","h-40"]],["r1:2","pico:3V3","red",["h145","v80"]]
+ ],"dependencies":{}
+}
