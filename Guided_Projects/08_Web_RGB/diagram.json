@@ -1,1 +1,16 @@
-{"version":1,"author":"David Castillo Ramirez","editor":"wokwi","parts":[{"type":"board-pi-pico-w","id":"pico","top":0,"left":130,"attrs":{}},{"type":"wokwi-rgb-led","id":"rgb1","top":0,"left":-145,"attrs":{"common":"cathode"}}],"connections":[],"dependencies":{}}
+{
+ "version":1,"author":"David Castillo Ramirez","editor":"wokwi",
+ "parts":[
+  {"type":"board-pi-pico-w","id":"pico","top":0,"left":130,"attrs":{}},
+  {"type":"wokwi-rgb-led","id":"rgb1","top":0,"left":-145,"attrs":{"common":"cathode"}},
+  {"type":"wokwi-resistor","id":"rr","top":75,"left":-80,"attrs":{"value":"220"}},
+  {"type":"wokwi-resistor","id":"rg","top":105,"left":-80,"attrs":{"value":"220"}},
+  {"type":"wokwi-resistor","id":"rb","top":135,"left":-80,"attrs":{"value":"220"}}
+ ],
+ "connections":[
+  ["pico:GP13","rr:2","red",["h-145","v80"]],["rr:1","rgb1:R","red",["h-30","v-65"]],
+  ["pico:GP14","rg:2","green",["h-145","v100"]],["rg:1","rgb1:G","green",["h-25","v-90"]],
+  ["pico:GP15","rb:2","blue",["h-145","v120"]],["rb:1","rgb1:B","blue",["h-20","v-115"]],
+  ["rgb1:COM","pico:GND.4","black",["h200"]]
+ ],"dependencies":{}
+}
