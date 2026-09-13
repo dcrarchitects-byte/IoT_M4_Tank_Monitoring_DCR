@@ -1,1 +1,17 @@
-{"version":1,"author":"David Castillo Ramirez","editor":"wokwi","parts":[{"type":"board-pi-pico-w","id":"pico","top":0,"left":160,"attrs":{}},{"type":"wokwi-led","id":"red","top":-105,"left":-95,"attrs":{"color":"red","label":"STOP"}},{"type":"wokwi-led","id":"yellow","top":0,"left":-95,"attrs":{"color":"yellow","label":"WAIT"}},{"type":"wokwi-led","id":"green","top":105,"left":-95,"attrs":{"color":"green","label":"GO"}},{"type":"wokwi-resistor","id":"r1","top":-50,"left":-40,"attrs":{"value":"220"}},{"type":"wokwi-resistor","id":"r2","top":55,"left":-40,"attrs":{"value":"220"}},{"type":"wokwi-resistor","id":"r3","top":160,"left":-40,"attrs":{"value":"220"}}],"connections":[],"dependencies":{}}
+{
+ "version":1,"author":"David Castillo Ramirez","editor":"wokwi",
+ "parts":[
+  {"type":"board-pi-pico-w","id":"pico","top":0,"left":160,"attrs":{}},
+  {"type":"wokwi-led","id":"red","top":-105,"left":-95,"attrs":{"color":"red","label":"STOP"}},
+  {"type":"wokwi-led","id":"yellow","top":0,"left":-95,"attrs":{"color":"yellow","label":"WAIT"}},
+  {"type":"wokwi-led","id":"green","top":105,"left":-95,"attrs":{"color":"green","label":"GO"}},
+  {"type":"wokwi-resistor","id":"r1","top":-50,"left":-40,"attrs":{"value":"220"}},
+  {"type":"wokwi-resistor","id":"r2","top":55,"left":-40,"attrs":{"value":"220"}},
+  {"type":"wokwi-resistor","id":"r3","top":160,"left":-40,"attrs":{"value":"220"}}
+ ],
+ "connections":[
+  ["pico:GP13","r1:2","red",["h-120","v-110"]],["r1:1","red:A","red",[]],["red:C","pico:GND.4","black",["h180","v110"]],
+  ["pico:GP14","r2:2","orange",["h-120","v-15"]],["r2:1","yellow:A","orange",[]],["yellow:C","pico:GND.4","black",["h180","v5"]],
+  ["pico:GP15","r3:2","green",["h-120","v80"]],["r3:1","green:A","green",[]],["green:C","pico:GND.4","black",["h180","v-100"]]
+ ],"dependencies":{}
+}
