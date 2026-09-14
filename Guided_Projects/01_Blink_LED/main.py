@@ -1,9 +1,11 @@
 from machine import Pin
 import time
 
-led = Pin("LED", Pin.OUT)
+# Module 4 guided project: Blink external LED
+# LED connected to GP15 through a 330-ohm resistor.
+led = Pin(15, Pin.OUT)
 
 while True:
     led.toggle()
-    print("Built-in LED:", "ON" if led.value() else "OFF")
+    print("External LED:", "ON" if led.value() else "OFF")
     time.sleep(1)
