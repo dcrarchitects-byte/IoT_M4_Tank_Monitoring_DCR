@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Project 7 - LED & Temperature Monitor</title>
+<script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+<style>
+body{margin:0;font-family:Arial,sans-serif;background:#eef4ef;color:#173b31}
+.wrap{max-width:900px;margin:auto;padding:32px}
+.header{display:flex;justify-content:space-between;gap:20px;align-items:center}
+.badge{padding:9px 14px;border-radius:999px;background:#f3e9d2;font-weight:700}
+.badge.ok{background:#dff1e6;color:#1f6048}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:22px}
+.card{background:#fff;border-radius:16px;padding:22px;box-shadow:0 8px 24px rgba(20,50,40,.06)}
+.value{font-size:42px;font-weight:800;margin-top:8px}
+.wide{grid-column:1/-1}
+button{border:0;border-radius:10px;padding:13px 22px;font-size:16px;font-weight:800;cursor:pointer;margin-right:8px}
+.on{background:#1f6048;color:#fff}.off{background:#f5dddd;color:#9c252d}
+small{color:#587067}
+@media(max-width:700px){.grid{grid-template-columns:1fr}.header{display:block}.badge{display:inline-block;margin-top:10px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="header">
+    <div>
+      <h1>LED Control & Temperature Monitoring</h1>
+      <p>Raspberry Pi Pico W · DHT22 · Remote LED control</p>
+    </div>
+    <div id="conn" class="badge">CONNECTING...</div>
+  </div>
+  <div class="grid">
+    <div class="card">
+      <b>TEMPERATURE</b>
+      <div class="value"><span id="temp">--</span> °C</div>
+    </div>
+    <div class="card">
+      <b>RELATIVE HUMIDITY</b>
+      <div class="value"><span id="hum">--</span> %</div>
+    </div>
+    <div class="card">
+      <b>LED STATUS</b>
+      <div class="value" id="led">--</div>
+    </div>
+    <div class="card wide">
+      <h2>Manual LED Control</h2>
+      <button class="on" onclick="setLed('ON')">LED ON</button>
+      <button class="off" onclick="setLed('OFF')">LED OFF</button>
+      <p><small>Sensor data is published by the Pico W every 5 seconds.</small></p>
+    </div>
+  </div>
+</div>
+<script>
+const broker = 'wss://broker.emqx.io:8084/mqtt';
+const statusTopic = 'dcr/iot-m4-tank-2026/project7/status';
+const commandTopic = 'dcr/iot-m4-tank-2026/project7/led/set';
+const client = mqtt.connect(broker,{
+  clientId:'dcr_p7_web_'+Math.random().toString(16).slice(2),
+  clean:true,connectTimeout:5000,reconnectPeriod:2000
+});
+const conn=document.getElementById('conn');
+client.on('connect',()=>{conn.textContent='CONNECTED';conn.classList.add('ok');client.subscribe(statusTopic);});
+client.on('reconnect',()=>{conn.textContent='RECONNECTING...';conn.classList.remove('ok');});
+client.on('offline',()=>{conn.textContent='OFFLINE';conn.classList.remove('ok');});
+client.on('error',()=>{conn.textContent='CONNECTION ERROR';conn.classList.remove('ok');});
+client.on('message',(topic,payload)=>{
+  try{
+    const d=JSON.parse(payload.toString());
+    document.getElementById('temp').textContent=Number(d.temperature).toFixed(1);
+    document.getElementById('hum').textContent=Number(d.humidity).toFixed(1);
+    document.getElementById('led').textContent=d.led;
+  }catch(e){}
+});
+function setLed(state){client.publish(commandTopic,state,{qos:0,retain:false});}
+</script>
+</body>
+</html>
