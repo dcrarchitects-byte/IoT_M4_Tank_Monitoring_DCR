@@ -2,7 +2,7 @@
 
 **Public repository:** https://github.com/dcrarchitects-byte/IoT_M4_Tank_Monitoring_DCR
 
-The assignment requires short video evidence for the eight guided projects and a final demonstration video. The source-code and circuit links below are already public. The **Video evidence** cells are intentionally marked `PENDING` until recordings are uploaded; fabricated evidence is not used.
+The table below organizes the source files and video evidence for the eight guided projects and the final Tank Monitoring and Filling System demonstration. Video links will be added as the recordings are completed.
 
 | # | Required evidence | Public source / circuit link | Video evidence |
 |---|---|---|---|
@@ -25,6 +25,9 @@ The assignment requires short video evidence for the eight guided projects and a
 - Circuit layout: https://github.com/dcrarchitects-byte/IoT_M4_Tank_Monitoring_DCR/blob/main/Final_Tank_Project/circuit_layout.svg
 - Dashboard preview: https://github.com/dcrarchitects-byte/IoT_M4_Tank_Monitoring_DCR/blob/main/Final_Tank_Project/dashboard_preview.html
 
-## Recording integrity note
+## Recording requirements
 
-The course instructions specify physical evidence with the student's name visible. Since the project is currently implemented in Wokwi rather than on physical hardware, the instructor should confirm whether screen-recorded simulation evidence is accepted. If approved, each recording should show the Wokwi circuit running, the relevant sensor/actuator state change, and an on-screen or physical name card.
+- Guided-project videos: maximum 30 seconds each.
+- Final project demonstration: minimum 2 minutes.
+- Student name must be visible in the recording.
+- Video links must be publicly accessible without requesting permission.
