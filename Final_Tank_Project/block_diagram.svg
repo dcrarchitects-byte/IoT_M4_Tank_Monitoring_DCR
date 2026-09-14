@@ -1,1 +1,45 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="650" viewBox="0 0 1200 650"><rect width="1200" height="650" fill="white"/><style>text{font-family:Arial;fill:#173b31}.box{fill:#f7faf8;stroke:#1f6048;stroke-width:3}.main{fill:#dcefe5;stroke:#1f6048;stroke-width:4}.out{fill:#fff;stroke:#9fb8ac;stroke-width:2}.line{stroke:#1f6048;stroke-width:3;fill:none;marker-end:url(#a)}</style><defs><marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#1f6048"/></marker></defs><text x="50" y="55" font-size="30" font-weight="700">Tank Monitoring System - Functional Block Diagram</text><rect class="box" x="60" y="210" width="200" height="90" rx="18"/><text x="160" y="245" text-anchor="middle" font-size="20" font-weight="700">DHT22</text><text x="160" y="273" text-anchor="middle" font-size="15">Temperature + RH</text><rect class="box" x="60" y="350" width="200" height="90" rx="18"/><text x="160" y="385" text-anchor="middle" font-size="20" font-weight="700">HC-SR04</text><text x="160" y="413" text-anchor="middle" font-size="15">Tank distance</text><rect class="main" x="410" y="190" width="300" height="270" rx="22"/><text x="560" y="235" text-anchor="middle" font-size="24" font-weight="700">RASPBERRY PI PICO W</text><text x="560" y="275" text-anchor="middle" font-size="17">MicroPython acquisition</text><text x="560" y="305" text-anchor="middle" font-size="17">Validation + conditionals</text><text x="560" y="335" text-anchor="middle" font-size="17">5-second update loop</text><text x="560" y="365" text-anchor="middle" font-size="17">Local indicator logic</text><text x="560" y="395" text-anchor="middle" font-size="17">Wi-Fi + HTTP server</text><rect class="out" x="850" y="120" width="250" height="75" rx="15"/><text x="975" y="153" text-anchor="middle" font-size="19" font-weight="700">RGB LED</text><text x="975" y="178" text-anchor="middle" font-size="14">Blue / Green / Red</text><rect class="out" x="850" y="230" width="250" height="75" rx="15"/><text x="975" y="263" text-anchor="middle" font-size="19" font-weight="700">Tank Alert LED</text><text x="975" y="288" text-anchor="middle" font-size="14">Assignment threshold</text><rect class="out" x="850" y="340" width="250" height="75" rx="15"/><text x="975" y="373" text-anchor="middle" font-size="19" font-weight="700">Pump Indicator</text><text x="975" y="398" text-anchor="middle" font-size="14">Manual web command</text><rect class="out" x="850" y="470" width="250" height="90" rx="15"/><text x="975" y="505" text-anchor="middle" font-size="19" font-weight="700">Web Dashboard</text><text x="975" y="532" text-anchor="middle" font-size="14">Live values + controls</text><path class="line" d="M260 255 H410"/><path class="line" d="M260 395 H410"/><path class="line" d="M710 230 H850"/><path class="line" d="M710 285 H850"/><path class="line" d="M710 360 H850"/><path class="line" d="M710 420 C780 420 790 515 850 515"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700">
+<rect width="1200" height="700" fill="white"/>
+<style>
+text{font-family:Arial;fill:#173b31}.box{fill:#f7faf8;stroke:#1f6048;stroke-width:3}
+.main{fill:#dcefe5;stroke:#1f6048;stroke-width:4}.net{fill:#fff4dc;stroke:#d6a21c;stroke-width:3}
+.out{fill:#fff;stroke:#9fb8ac;stroke-width:2}.line{stroke:#1f6048;stroke-width:3;fill:none;marker-end:url(#a)}
+.bi{stroke:#1f6048;stroke-width:3;fill:none;marker-start:url(#a);marker-end:url(#a)}
+</style>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#1f6048"/></marker></defs>
+<text x="50" y="52" font-size="30" font-weight="700">Tank Monitoring System - Functional Block Diagram</text>
+<rect class="box" x="55" y="180" width="205" height="90" rx="18"/>
+<text x="158" y="215" text-anchor="middle" font-size="20" font-weight="700">DHT22</text>
+<text x="158" y="244" text-anchor="middle" font-size="15">Temperature + RH</text>
+<rect class="box" x="55" y="320" width="205" height="90" rx="18"/>
+<text x="158" y="355" text-anchor="middle" font-size="20" font-weight="700">HC-SR04</text>
+<text x="158" y="384" text-anchor="middle" font-size="15">Tank distance</text>
+<rect class="main" x="350" y="145" width="300" height="315" rx="22"/>
+<text x="500" y="190" text-anchor="middle" font-size="24" font-weight="700">RASPBERRY PI PICO W</text>
+<text x="500" y="232" text-anchor="middle" font-size="17">MicroPython acquisition</text>
+<text x="500" y="265" text-anchor="middle" font-size="17">Validation + conditionals</text>
+<text x="500" y="298" text-anchor="middle" font-size="17">5-second update loop</text>
+<text x="500" y="331" text-anchor="middle" font-size="17">RGB + tank alert logic</text>
+<text x="500" y="364" text-anchor="middle" font-size="17">Pump output control</text>
+<text x="500" y="397" text-anchor="middle" font-size="17">Wi-Fi + MQTT client</text>
+<rect class="net" x="750" y="140" width="260" height="95" rx="18"/>
+<text x="880" y="176" text-anchor="middle" font-size="20" font-weight="700">Public MQTT Broker</text>
+<text x="880" y="204" text-anchor="middle" font-size="15">Sensor data + control topics</text>
+<rect class="out" x="750" y="295" width="260" height="100" rx="18"/>
+<text x="880" y="332" text-anchor="middle" font-size="20" font-weight="700">Browser Dashboard</text>
+<text x="880" y="362" text-anchor="middle" font-size="15">Live values + Pump ON/OFF</text>
+<rect class="out" x="750" y="470" width="190" height="75" rx="15"/>
+<text x="845" y="501" text-anchor="middle" font-size="18" font-weight="700">RGB LED</text>
+<text x="845" y="526" text-anchor="middle" font-size="14">Blue / Green / Red</text>
+<rect class="out" x="970" y="470" width="190" height="75" rx="15"/>
+<text x="1065" y="501" text-anchor="middle" font-size="18" font-weight="700">Tank Alert LED</text>
+<text x="1065" y="526" text-anchor="middle" font-size="14">Threshold indicator</text>
+<rect class="out" x="860" y="580" width="190" height="75" rx="15"/>
+<text x="955" y="611" text-anchor="middle" font-size="18" font-weight="700">Pump Indicator</text>
+<text x="955" y="636" text-anchor="middle" font-size="14">Manual browser command</text>
+<path class="line" d="M260 225 H350"/><path class="line" d="M260 365 H350"/>
+<path class="bi" d="M650 190 H750"/><path class="bi" d="M880 235 V295"/>
+<path class="line" d="M650 335 C700 335 700 507 750 507"/>
+<path class="line" d="M650 355 C760 355 850 507 970 507"/>
+<path class="line" d="M650 385 C760 385 790 618 860 618"/>
+</svg>
