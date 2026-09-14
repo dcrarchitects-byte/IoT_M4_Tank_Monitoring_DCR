@@ -4,9 +4,9 @@
 **Course:** Internet of Things - Computer Systems Engineering  
 **Module:** 4 - Ideation for Creative Solutions
 
-This public repository contains the source code, Wokwi-compatible circuit definitions, diagrams, dashboard preview, and evidence index for the Module 4 assignment **Tank Monitoring and Filling System**.
+This public repository contains the source code, Wokwi circuit definitions, diagrams, dashboard preview, and evidence index for the Module 4 assignment **Tank Monitoring and Filling System**.
 
-> **Prototype mode:** Wokwi virtual functional prototype. A physical Raspberry Pi Pico W is not currently available, so the repository does not claim physical-hardware evidence. The source is structured so the final project and all eight guided projects can be reproduced and recorded in Wokwi.
+The guided exercises and final integrated project were developed in MicroPython and tested in Wokwi. Each project folder contains the files needed to reproduce its circuit and program.
 
 ## Assignment deliverables
 
@@ -56,11 +56,11 @@ IoT_M4_Tank_Monitoring_DCR/
 | Cold status | RGB blue below 20 °C |
 | Moderate status | RGB green from 20–30 °C |
 | Hot status | RGB red above 30 °C |
-| Tank warning | Red LED on GP16 when distance < 10 cm, as specified by the activity |
+| Tank warning | Red LED on GP16 when distance < 10 cm |
 | Manual pump | Indicator LED on GP17 controlled from web server |
 | Browser update | `/data` request every 5 seconds |
 | Robustness | DHT22 validation, ultrasonic timeout, Wi-Fi/server retry |
 
 ## Evidence
 
-See **[Evidence_Links.md](Evidence_Links.md)** for direct links to all guided projects, final-project assets, and the slots where video URLs will be added after recording.
+See **[Evidence_Links.md](Evidence_Links.md)** for the guided-project links, final-project assets, and video evidence links.
