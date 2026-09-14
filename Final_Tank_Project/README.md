@@ -7,7 +7,7 @@ This folder contains the Module 4 final IoT prototype for **IoT Masters**.
 - DHT22 temperature and relative-humidity acquisition.
 - HC-SR04 distance acquisition to simulate tank liquid-level detection.
 - RGB LED temperature indication: blue below 20 C, green from 20 through 30 C, and red above 30 C.
-- Red tank-warning LED when the assignment-defined condition `distance < 10 cm` is true.
+- Red tank-warning LED when `distance < 10 cm`.
 - Yellow pump-simulation LED controlled manually from the web dashboard.
 - Embedded HTTP server with `/`, `/data`, `/pump/on`, and `/pump/off` routes.
 - Browser data refresh every 5 seconds.
@@ -28,10 +28,10 @@ This folder contains the Module 4 final IoT prototype for **IoT Masters**.
 
 The DHT22 data line includes a 10 kOhm pull-up to 3.3 V. RGB and indicator LED channels use 220 ohm current-limiting resistors.
 
-## Physical-hardware note
+## Electrical implementation considerations
 
-This course submission is prepared as a **virtual functional prototype** because a physical Pico W is not currently available. In physical hardware, protect the Pico W input from the HC-SR04 5 V ECHO signal with a level shifter or resistor divider. A real water pump must never be powered directly from a GPIO.
+The HC-SR04 ECHO signal is 5 V on the physical device, so a hardware implementation should protect the Pico W input with a suitable voltage divider or level shifter. A real water pump requires an external driver or relay stage and must not be powered directly from a GPIO pin.
 
-## Geometry note
+## Tank-level calibration
 
-The assignment explicitly requests the red warning LED when **distance is less than 10 cm**, and the code implements that rule. In a conventional top-mounted ultrasonic tank sensor, smaller measured distance normally corresponds to a higher liquid level, so a production installation should calibrate tank geometry before translating distance into liquid level.
+The implemented warning threshold is `distance < 10 cm`, following the project requirement. In a real tank installation, the relationship between ultrasonic distance and liquid level should be calibrated to the tank geometry before converting the reading into a level percentage.
