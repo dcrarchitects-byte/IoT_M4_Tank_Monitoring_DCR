@@ -1,6 +1,6 @@
 # Guided Projects - Module 4 Evidence
 
-Each folder contains reproducible MicroPython and Wokwi circuit files for one of the eight required guided projects.
+Each folder contains the MicroPython program and Wokwi circuit definition for one of the eight guided projects required in Module 4.
 
 1. Blink LED
 2. Control External LED with Push Button
@@ -11,4 +11,4 @@ Each folder contains reproducible MicroPython and Wokwi circuit files for one of
 7. LED Control and Temperature Monitoring via Web Server
 8. Web Server to Control RGB LEDs
 
-Because the current implementation is a virtual prototype, video links should only be added after the instructor confirms that Wokwi recordings are acceptable substitutes for physical-hardware evidence.
+For each project, load `main.py` and `diagram.json` into a Raspberry Pi Pico W MicroPython project in Wokwi, run the simulation, and record the required demonstration.
