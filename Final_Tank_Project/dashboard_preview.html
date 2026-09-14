@@ -1,1 +1,99 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Tank Monitoring Dashboard Preview</title><style>body{margin:0;font-family:Arial;background:#eef4ef;color:#22342d}.wrap{max-width:1100px;margin:auto;padding:36px}.header{display:flex;justify-content:space-between}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{background:#fff;border-radius:17px;padding:22px}.value{font-size:42px;font-weight:800;color:#193c31}.badge{padding:10px 15px;border-radius:18px;background:#dff1e6;color:#1f6048;font-weight:700}.wide{grid-column:span 2}.full{grid-column:1/-1}button{padding:12px 18px;border-radius:10px;border:0;font-weight:800}.on{background:#1f6048;color:white}.off{background:#fff1f1;color:#b92e35}</style></head><body><div class="wrap"><div class="header"><div><h1>Tank Monitoring &amp; Filling System</h1><p>Raspberry Pi Pico W · DHT22 · HC-SR04 · Web control</p></div><div class="badge">CONNECTED · 10.13.37.2</div></div><div class="grid"><div class="card"><b>TEMPERATURE</b><div class="value">28.4 °C</div><p>MODERATE · RGB GREEN</p></div><div class="card"><b>RELATIVE HUMIDITY</b><div class="value">56.2 %</div></div><div class="card"><b>TANK DISTANCE</b><div class="value">18.7 cm</div><p>NORMAL · ALERT OFF</p></div><div class="card wide"><b>SYSTEM INTERPRETATION</b><h3>Temperature status: Moderate</h3><p>Blue = cold (&lt;20 °C) · Green = moderate (20–30 °C) · Red = hot (&gt;30 °C). Tank warning: distance below 10 cm.</p><p>Sensor health: Normal · Browser refresh: every 5 seconds</p></div><div class="card"><b>MANUAL PUMP CONTROL</b><h2>Pump: OFF</h2><button class="on">TURN ON</button> <button class="off">TURN OFF</button></div><div class="card full">Dashboard route: / · JSON: /data · Pump commands: /pump/on and /pump/off.</div></div></div></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tank Monitoring & Filling System</title>
+<script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+<style>
+body{margin:0;font-family:Arial,sans-serif;background:#eef4ef;color:#22342d}
+.wrap{max-width:1100px;margin:auto;padding:36px}
+.header{display:flex;justify-content:space-between;gap:20px;align-items:center}
+.badge{padding:10px 15px;border-radius:18px;background:#f3e9d2;font-weight:700}
+.badge.ok{background:#dff1e6;color:#1f6048}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px}
+.card{background:#fff;border-radius:17px;padding:22px;box-shadow:0 8px 24px rgba(20,50,40,.06)}
+.value{font-size:42px;font-weight:800;color:#193c31;margin-top:8px}
+.wide{grid-column:span 2}.full{grid-column:1/-1}
+button{padding:12px 18px;border-radius:10px;border:0;font-weight:800;cursor:pointer;margin-right:8px}
+.on{background:#1f6048;color:white}.off{background:#fff1f1;color:#b92e35}
+.fault{color:#9b2d32;font-weight:700}
+small{color:#587067}
+@media(max-width:700px){.grid{grid-template-columns:1fr}.wide,.full{grid-column:1}.header{display:block}.badge{display:inline-block;margin-top:10px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="header">
+    <div>
+      <h1>Tank Monitoring &amp; Filling System</h1>
+      <p>Raspberry Pi Pico W · DHT22 · HC-SR04 · MQTT control</p>
+    </div>
+    <div id="conn" class="badge">CONNECTING...</div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <b>TEMPERATURE</b>
+      <div class="value"><span id="temp">--</span> °C</div>
+      <p id="rgb">--</p>
+    </div>
+    <div class="card">
+      <b>RELATIVE HUMIDITY</b>
+      <div class="value"><span id="hum">--</span> %</div>
+    </div>
+    <div class="card">
+      <b>TANK DISTANCE</b>
+      <div class="value"><span id="dist">--</span> cm</div>
+      <p id="tank">--</p>
+    </div>
+
+    <div class="card wide">
+      <b>SYSTEM STATUS</b>
+      <h3>RGB temperature indicator: <span id="rgb2">--</span></h3>
+      <p>Blue = cold (&lt;20 °C) · Green = moderate (20–30 °C) · Red = hot (&gt;30 °C).</p>
+      <p>Tank warning LED activates when distance is below 10 cm.</p>
+      <p>Sensor status: <span id="fault">--</span></p>
+      <small>Sensor data updates every 5 seconds.</small>
+    </div>
+
+    <div class="card">
+      <b>MANUAL PUMP CONTROL</b>
+      <h2>Pump: <span id="pump">--</span></h2>
+      <button class="on" onclick="setPump('ON')">TURN ON</button>
+      <button class="off" onclick="setPump('OFF')">TURN OFF</button>
+    </div>
+  </div>
+</div>
+<script>
+const broker='wss://broker.emqx.io:8084/mqtt';
+const dataTopic='dcr/iot-m4-tank-2026/final/data';
+const commandTopic='dcr/iot-m4-tank-2026/final/pump/set';
+const client=mqtt.connect(broker,{
+  clientId:'dcr_final_web_'+Math.random().toString(16).slice(2),
+  clean:true,connectTimeout:5000,reconnectPeriod:2000
+});
+const conn=document.getElementById('conn');
+client.on('connect',()=>{conn.textContent='CONNECTED';conn.classList.add('ok');client.subscribe(dataTopic);});
+client.on('reconnect',()=>{conn.textContent='RECONNECTING...';conn.classList.remove('ok');});
+client.on('offline',()=>{conn.textContent='OFFLINE';conn.classList.remove('ok');});
+client.on('error',()=>{conn.textContent='CONNECTION ERROR';conn.classList.remove('ok');});
+client.on('message',(topic,payload)=>{
+  try{
+    const d=JSON.parse(payload.toString());
+    document.getElementById('temp').textContent=d.temperature==null?'--':Number(d.temperature).toFixed(1);
+    document.getElementById('hum').textContent=d.humidity==null?'--':Number(d.humidity).toFixed(1);
+    document.getElementById('dist').textContent=d.distance==null?'--':Number(d.distance).toFixed(1);
+    document.getElementById('rgb').textContent=d.rgb_status;
+    document.getElementById('rgb2').textContent=d.rgb_status;
+    document.getElementById('tank').textContent=d.tank_status;
+    document.getElementById('pump').textContent=d.pump_on?'ON':'OFF';
+    const f=document.getElementById('fault');
+    f.textContent=d.fault;
+    f.className=d.fault==='None'?'':'fault';
+  }catch(e){}
+});
+function setPump(state){client.publish(commandTopic,state,{qos:0,retain:false});}
+</script>
+</body>
+</html>
