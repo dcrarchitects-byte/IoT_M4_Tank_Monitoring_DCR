@@ -4,7 +4,7 @@
 **Course:** Internet of Things - Computer Systems Engineering  
 **Module:** 4 - Ideation for Creative Solutions
 
-This public repository contains the source code, Wokwi circuit definitions, diagrams, dashboard preview, and evidence index for the Module 4 assignment **Tank Monitoring and Filling System**.
+This public repository contains the source code, Wokwi circuit definitions, browser dashboards, diagrams, and evidence index for the Module 4 assignment **Tank Monitoring and Filling System**.
 
 The guided exercises and final integrated project were developed in MicroPython and tested in Wokwi. Each project folder contains the files needed to reproduce its circuit and program.
 
@@ -16,9 +16,10 @@ The guided exercises and final integrated project were developed in MicroPython 
 - HC-SR04 distance acquisition.
 - RGB LED temperature status.
 - Red tank-warning LED.
-- Web-controlled pump indicator LED.
-- Embedded Pico W web dashboard with 5-second data refresh.
-- Error handling for unavailable sensor readings and server/network recovery.
+- Browser-controlled pump indicator LED.
+- Browser dashboard with 5-second sensor updates.
+- MQTT communication between the Pico W and browser dashboard.
+- Error handling for unavailable sensor readings and connection recovery.
 - Annotated flowchart and block diagram.
 - Evidence link index.
 
@@ -36,7 +37,9 @@ IoT_M4_Tank_Monitoring_DCR/
 │   ├── 05_Ultrasonic/
 │   ├── 06_Servo_Potentiometer/
 │   ├── 07_Web_LED_Temperature/
+│   │   └── dashboard.html
 │   └── 08_Web_RGB/
+│       └── dashboard.html
 └── Final_Tank_Project/
     ├── README.md
     ├── main.py
@@ -57,9 +60,10 @@ IoT_M4_Tank_Monitoring_DCR/
 | Moderate status | RGB green from 20–30 °C |
 | Hot status | RGB red above 30 °C |
 | Tank warning | Red LED on GP16 when distance < 10 cm |
-| Manual pump | Indicator LED on GP17 controlled from web server |
-| Browser update | `/data` request every 5 seconds |
-| Robustness | DHT22 validation, ultrasonic timeout, Wi-Fi/server retry |
+| Manual pump | Indicator LED on GP17 controlled from browser dashboard |
+| Browser update | Sensor data published every 5 seconds |
+| Communication | MQTT over Wi-Fi |
+| Robustness | DHT22 validation, ultrasonic timeout, connection recovery |
 
 ## Evidence
 
