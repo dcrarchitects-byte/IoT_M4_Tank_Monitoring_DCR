@@ -95,7 +95,7 @@ class SimpleMQTT:
         try:
             first = self.sock.recv(1)
             if not first:
-                raise OSError("MQTT connection closed")
+                return None, None
         except OSError:
             return None, None
         packet_type = first[0] >> 4
@@ -116,18 +116,36 @@ class SimpleMQTT:
 
 def connect_wifi():
     wlan = network.WLAN(network.STA_IF)
-    wlan.active(True)
-    if not wlan.isconnected():
-        wlan.connect(WIFI_SSID, WIFI_PASSWORD)
-        print("Connecting to Wi-Fi", end="")
-        for _ in range(60):
-            if wlan.isconnected():
-                break
-            print(".", end="")
-            time.sleep(0.25)
-    if not wlan.isconnected():
-        raise OSError("Wi-Fi connection failed")
-    print("\nWi-Fi connected:", wlan.ifconfig()[0])
+    attempt = 0
+
+    while not wlan.isconnected():
+        attempt += 1
+        print("Wi-Fi attempt", attempt, "- connecting to", WIFI_SSID)
+
+        try:
+            wlan.active(False)
+            time.sleep_ms(250)
+            wlan.active(True)
+            try:
+                wlan.disconnect()
+            except:
+                pass
+            time.sleep_ms(250)
+            wlan.connect(WIFI_SSID, WIFI_PASSWORD)
+
+            for _ in range(80):
+                if wlan.isconnected():
+                    break
+                time.sleep_ms(250)
+
+        except Exception as exc:
+            print("Wi-Fi attempt error:", exc)
+
+        if not wlan.isconnected():
+            print("Wi-Fi not ready. Retrying in 2 seconds...")
+            time.sleep(2)
+
+    print("Wi-Fi connected:", wlan.ifconfig()[0])
     return wlan
 
 def read_sensor():
@@ -150,7 +168,7 @@ def connect_mqtt():
     print("Command topic:", COMMAND_TOPIC)
     return mqtt
 
-connect_wifi()
+wlan = connect_wifi()
 mqtt = None
 last_publish = time.ticks_add(time.ticks_ms(), -5000)
 temperature = 0.0
@@ -158,6 +176,13 @@ humidity = 0.0
 
 while True:
     try:
+        if not wlan.isconnected():
+            print("Wi-Fi connection lost. Reconnecting...")
+            if mqtt is not None:
+                mqtt.close()
+            mqtt = None
+            wlan = connect_wifi()
+
         if mqtt is None:
             mqtt = connect_mqtt()
             last_publish = time.ticks_add(time.ticks_ms(), -5000)
@@ -193,4 +218,6 @@ while True:
         if mqtt is not None:
             mqtt.close()
         mqtt = None
+        if not wlan.isconnected():
+            wlan = connect_wifi()
         time.sleep(2)
