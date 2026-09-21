@@ -1,0 +1,71 @@
+{
+  "version": 1,
+  "author": "David Castillo Ramirez",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "board-pi-pico-w",
+      "id": "pico",
+      "top": 40,
+      "left": 180,
+      "attrs": {
+        "env": "micropython-20241129-v1.24.1"
+      }
+    },
+    {
+      "type": "chip-greenhouse-bme280",
+      "id": "chip1",
+      "top": -80,
+      "left": -120,
+      "attrs": {
+        "temperature": "25",
+        "humidity": "50",
+        "pressure": "1013"
+      }
+    },
+    {
+      "type": "wokwi-rgb-led",
+      "id": "rgb",
+      "top": 165,
+      "left": -110,
+      "attrs": {
+        "common": "cathode"
+      }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "rr",
+      "top": 125,
+      "left": 15,
+      "attrs": { "value": "220" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "rg",
+      "top": 165,
+      "left": 15,
+      "attrs": { "value": "220" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "rb",
+      "top": 205,
+      "left": 15,
+      "attrs": { "value": "220" }
+    }
+  ],
+  "connections": [
+    [ "chip1:SDA", "pico:GP2", "orange", [] ],
+    [ "chip1:SCL", "pico:GP3", "green", [] ],
+    [ "chip1:GND", "pico:GND.1", "black", [] ],
+    [ "chip1:VCC", "pico:VBUS", "red", [] ],
+    [ "pico:GP13", "rr:1", "red", [] ],
+    [ "rr:2", "rgb:R", "red", [] ],
+    [ "pico:GP14", "rg:1", "green", [] ],
+    [ "rg:2", "rgb:G", "green", [] ],
+    [ "pico:GP15", "rb:1", "blue", [] ],
+    [ "rb:2", "rgb:B", "blue", [] ],
+    [ "rgb:COM", "pico:GND.1", "black", [] ]
+  ],
+  "dependencies": {}
+}
