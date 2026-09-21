@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="422pt" height="941pt" viewBox="0.00 0.00 422.30 940.80" xmlns="http://www.w3.org/2000/svg">
+<g font-family="Arial" font-size="10">
+<rect width="422.3" height="940.8" fill="white"/>
+<ellipse cx="305.5" cy="46" rx="32.5" ry="18" fill="#f7f7f7" stroke="#d9d9d9"/><text x="305.5" y="49" text-anchor="middle">START</text>
+<rect x="223" y="97" width="165" height="36" rx="12" fill="white" stroke="#d9d9d9"/><text x="305.5" y="112" text-anchor="middle">Initialize I2C, BME280 registers,</text><text x="305.5" y="123" text-anchor="middle">RGB GPIO and network interface</text>
+<rect x="217.5" y="166" width="176" height="36" rx="12" fill="white" stroke="#d9d9d9"/><text x="305.5" y="181" text-anchor="middle">Attempt Wi-Fi and Blynk connection</text><text x="305.5" y="192" text-anchor="middle">without blocking local monitoring</text>
+<rect x="236" y="235" width="139" height="36" rx="12" fill="white" stroke="#d9d9d9"/><text x="305.5" y="250" text-anchor="middle">Read temperature, humidity</text><text x="305.5" y="261" text-anchor="middle">and pressure every 5 s</text>
+<polygon points="232.5,307 298,341 232.5,375 167,341" fill="#fff7ee" stroke="#d9d9d9"/><text x="232.5" y="338" text-anchor="middle">Sensor read</text><text x="232.5" y="349" text-anchor="middle">successful?</text>
+<rect x="176.5" y="414" width="112" height="36" rx="12" fill="white" stroke="#d9d9d9"/><text x="232.5" y="429" text-anchor="middle">If first valid sample:</text><text x="232.5" y="440" text-anchor="middle">set pressure baseline</text>
+<rect x="146" y="482" width="173" height="36" rx="12" fill="white" stroke="#d9d9d9"/><text x="232.5" y="497" text-anchor="middle">Classify each variable:</text><text x="232.5" y="508" text-anchor="middle">NORMAL / SUSPICIOUS / ALERT</text>
+<rect x="162.5" y="551" width="140" height="36" rx="12" fill="#fff7ee" stroke="#d9d9d9"/><text x="232.5" y="566" text-anchor="middle">Overall status = highest</text><text x="232.5" y="577" text-anchor="middle">severity among all variables</text>
+<rect x="178" y="620" width="109" height="36" rx="12" fill="white" stroke="#d9d9d9"/><text x="232.5" y="635" text-anchor="middle">Drive RGB LED:</text><text x="232.5" y="646" text-anchor="middle">Green / Yellow / Red</text>
+<polygon points="232.5,689 296,723 232.5,757 169,723" fill="#eef6ff" stroke="#d9d9d9"/><text x="232.5" y="720" text-anchor="middle">Blynk</text><text x="232.5" y="731" text-anchor="middle">connected?</text>
+<rect x="176.5" y="786" width="154" height="36" rx="12" fill="white" stroke="#d9d9d9"/><text x="253.5" y="801" text-anchor="middle">Publish Temperature, Humidity,</text><text x="253.5" y="812" text-anchor="middle">Air Pressure and Alert Level</text>
+<rect x="0" y="786" width="151" height="36" rx="12" fill="#eef6ff" stroke="#d9d9d9"/><text x="75.5" y="801" text-anchor="middle">Retry Wi-Fi/Blynk periodically;</text><text x="75.5" y="812" text-anchor="middle">keep local sensing active</text>
+<ellipse cx="253.5" cy="894" rx="59.6" ry="18" fill="#f7f7f7" stroke="#d9d9d9"/><text x="253.5" y="897" text-anchor="middle">WAIT / REPEAT</text>
+<rect x="64.5" y="414" width="102" height="36" rx="12" fill="#fff0f0" stroke="#d9d9d9"/><text x="115.5" y="429" text-anchor="middle">Set RGB = RED</text><text x="115.5" y="440" text-anchor="middle">Report sensor fault</text>
+<g stroke="#777" fill="none" marker-end="url(#a)">
+<defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#777"/></marker></defs>
+<path d="M305.5,64 L305.5,97"/><path d="M305.5,133 L305.5,166"/><path d="M305.5,202 L305.5,235"/>
+<path d="M292,271 L250,312"/><path d="M232.5,375 L232.5,414"/><path d="M232.5,450 L232.5,482"/><path d="M232.5,518 L232.5,551"/><path d="M232.5,587 L232.5,620"/><path d="M232.5,656 L232.5,689"/>
+<path d="M244,756 L251,786"/><path d="M210,748 L115,786"/><path d="M253.5,822 L253.5,876"/><path d="M151,822 L205,884"/>
+<path d="M185,363 C150,380 130,395 115,414"/><path d="M115,450 C90,570 80,680 75,786"/>
+</g>
+<text x="246" y="398">Yes</text><text x="174" y="388">No</text><text x="254" y="773">Yes</text><text x="155" y="773">No</text>
+</g></svg>
