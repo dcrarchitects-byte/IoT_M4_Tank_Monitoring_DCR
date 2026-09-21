@@ -1,0 +1,36 @@
+{
+  "name": "BME280 Environmental Sensor",
+  "author": "David Castillo Ramirez",
+  "pins": [
+    "VCC",
+    "GND",
+    "SDA",
+    "SCL"
+  ],
+  "controls": [
+    {
+      "id": "temperature",
+      "label": "Temperature (°C)",
+      "type": "range",
+      "min": -40,
+      "max": 85,
+      "step": 1
+    },
+    {
+      "id": "humidity",
+      "label": "Humidity (%)",
+      "type": "range",
+      "min": 0,
+      "max": 100,
+      "step": 1
+    },
+    {
+      "id": "pressure",
+      "label": "Pressure (hPa)",
+      "type": "range",
+      "min": 300,
+      "max": 1100,
+      "step": 1
+    }
+  ]
+}
